@@ -42,8 +42,8 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 float d = distance(float2(0.5, 0.5), i.uv);
-                float a = abs(sin(_Time.y)) * 0.4;
-                return step(a,d);
+                d = d * 30;
+                return d;
             }
             ENDCG
         }
