@@ -1,4 +1,4 @@
-﻿Shader "Hidden/DistanceField"
+﻿Shader "Hidden/NewImageEffectShader"
 {
     Properties
     {
@@ -7,6 +7,8 @@
     SubShader
     {
         // No culling or depth
+        Cull Off ZWrite Off ZTest Always
+
         Pass
         {
             CGPROGRAM
@@ -39,11 +41,10 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float d = distance(float2(0.5, 0.5), i.uv);
-                d = d * 30;
-                d = abs(sin(d + _Time * 40));
-                d = step(0.5,d);
-                return d;
+                fixed4 col = tex2D(_MainTex, i.uv);
+                // just invert the colors
+                col.rgb = 1 - col.rgb;
+                return col;
             }
             ENDCG
         }

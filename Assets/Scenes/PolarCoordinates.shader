@@ -36,14 +36,15 @@
             }
 
             sampler2D _MainTex;
+            #define PI 3.14159265359
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float d = distance(float2(0.5, 0.5), i.uv);
-                d = d * 30;
-                d = abs(sin(d + _Time * 40));
-                d = step(0.5,d);
-                return d;
+                half2 st = 0.5 - i.uv;
+                float a = atan2(st.y,st.x);
+                float d = min(abs(cos(a * 2.5)) + 0.4,abs(sin (a * 2.5)) + 1.1) * 0.32;
+                float r = length(st);
+                return step(r,d);
             }
             ENDCG
         }

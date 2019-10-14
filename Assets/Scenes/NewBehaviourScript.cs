@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode, RequireComponent (typeof (Renderer))]
 public class NewBehaviourScript : MonoBehaviour {
     public Material mat;
     // Start is called before the first frame update
